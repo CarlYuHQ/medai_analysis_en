@@ -1075,7 +1075,7 @@ function isDarkSection(el) {
 (function() {
   const el = document.getElementById('chart-platform');
   if (!el || !DS.platform_distribution) return;
-  const chart = echarts.init(el, null, {renderer: 'svg'});
+  const chart = echarts.init(el, null, {renderer: 'canvas', useDirtyRect: false});
   const segNameMap = {'Takaichi-JP':'Takaichi (Japanese)','Takaichi-EN':'Takaichi (English)','Takaichi-ZH':'Takaichi (Chinese)','LePen-EN':'Le Pen (English)','LePen-ZH':'Le Pen (Chinese)'};
   const platNameMap = {'twitter':'Twitter/X','weibo':'Weibo','youtube':'YouTube','bluesky':'Bluesky','reddit':'Reddit','instagram':'Instagram','facebook':'Facebook','threads':'Threads'};
   const data = [];
@@ -1174,7 +1174,7 @@ function isDarkSection(el) {
 (function() {
   const el = document.getElementById('chart-sentiment-donuts');
   if (!el || !S.proportions) return;
-  const chart = echarts.init(el, null, {renderer: 'svg'});
+  const chart = echarts.init(el, null, {renderer: 'canvas', useDirtyRect: false});
   const showSegs = [
     {seg:'Takaichi-JP', label:'Takaichi (Japanese)', color:'#7c3aed'},
     {seg:'Takaichi-EN', label:'Takaichi (English)', color:'#8b5cf6'},
@@ -1234,7 +1234,7 @@ function isDarkSection(el) {
 (function() {
   const el = document.getElementById('chart-sentiment-platform');
   if (!el || !S.sentiment_by_platform) return;
-  const chart = echarts.init(el, null, {renderer: 'svg'});
+  const chart = echarts.init(el, null, {renderer: 'canvas', useDirtyRect: false});
   const platforms = Object.keys(S.sentiment_by_platform).filter(p => (S.sentiment_by_platform[p].total || 0) > 30);
   const sentiments = [{key:'positive',name:'Positive',color:COLORS.pos},{key:'negative',name:'Negative',color:COLORS.neg},{key:'neutral',name:'Neutral',color:COLORS.neu}];
   chart.setOption({animation:false,
@@ -1259,7 +1259,7 @@ function isDarkSection(el) {
 (function() {
   const el = document.getElementById('chart-emotion-radar');
   if (!el || !E.radar_data) return;
-  const chart = echarts.init(el, null, {renderer: 'svg'});
+  const chart = echarts.init(el, null, {renderer: 'canvas', useDirtyRect: false});
   const emotions = E.radar_data.emotions || [];
   const emoZh = {anger:'Anger',confusion:'Confusion',disappointment:'Disappointment',discomfort:'Discomfort',disgust:'Disgust',embarrassment:'Embarrassment',fear:'Fear',frustration:'Frustration',happiness:'Happiness',hope:'Hope',neutral:'Neutral',relief:'Relief',respect:'Respect',sadness:'Sadness',surprise:'Surprise'};
   const series = E.radar_data.series || {};
@@ -1282,7 +1282,7 @@ function isDarkSection(el) {
 (function() {
   const el = document.getElementById('chart-emotion-heatmap');
   if (!el) return;
-  const chart = echarts.init(el, null, {renderer: 'svg'});
+  const chart = echarts.init(el, null, {renderer: 'canvas', useDirtyRect: false});
   // Build from leader_emotion_summary
   const leaderKeys = ['Takaichi','LePen'];
   const leaderLabels = ['Takaichi','Le Pen'];
@@ -1330,7 +1330,7 @@ function isDarkSection(el) {
 ['zh','en','jp'].forEach(lang => {
   const el = document.getElementById('wordcloud-' + lang);
   if (!el || !T.wordcloud_data) return;
-  const chart = echarts.init(el, null, {renderer: 'svg'});
+  const chart = echarts.init(el, null, {renderer: 'canvas', useDirtyRect: false});
   // Merge Takaichi and LePen wordcloud data for this language
   let merged = [];
   const langUpper = lang.toUpperCase();
@@ -1376,7 +1376,7 @@ function isDarkSection(el) {
 (function() {
   const el = document.getElementById('chart-comparison-radar');
   if (!el) return;
-  const chart = echarts.init(el, null, {renderer: 'svg'});
+  const chart = echarts.init(el, null, {renderer: 'canvas', useDirtyRect: false});
   const lc = C.leader_comparison || {};
   const gf = C.gender_frames || {};
   const db = C.double_bind || {};
@@ -1522,7 +1522,7 @@ function isDarkSection(el) {
 (function() {
   const el = document.getElementById('chart-temporal-line');
   if (!el || !TM.monthly_sentiment) return;
-  const chart = echarts.init(el, null, {renderer: 'svg'});
+  const chart = echarts.init(el, null, {renderer: 'canvas', useDirtyRect: false});
   // Collect all months for x-axis
   const allMonths = new Set();
   const showSegs = [
