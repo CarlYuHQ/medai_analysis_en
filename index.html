@@ -1088,6 +1088,7 @@ function isDarkSection(el) {
     data.push({ name: segNameMap[seg]||seg, children, itemStyle: { color: leaderColors[leader] } });
   }
   chart.setOption({
+    animation: false,
     tooltip: { trigger: 'item', formatter: '{b}: {c}' },
     series: [{ type: 'sunburst', radius: ['15%','90%'], data, label: { fontSize: 10, color: '#fff' }, itemStyle: { borderWidth: 1, borderColor: '#fff' } }]
   });
@@ -1197,10 +1198,11 @@ function isDarkSection(el) {
       type:'pie', radius:['22%','36%'],
       center:[positions[idx].cx, positions[idx].cy],
       data, label:{show:true, formatter:'{b}\n{d}%', fontSize:10, color:'#e8e4df'},
-      emphasis:{itemStyle:{shadowBlur:10}}
+      emphasis:{itemStyle:{shadowBlur:10}},
+      animation: false
     };
   });
-  chart.setOption({
+  chart.setOption({animation:false,
     tooltip:{trigger:'item', formatter:'{b}: {c}%'},
     title: showSegs.map((item, idx) => {
       const positions = [
@@ -1235,7 +1237,7 @@ function isDarkSection(el) {
   const chart = echarts.init(el, null, {renderer: 'canvas', useDirtyRect: false});
   const platforms = Object.keys(S.sentiment_by_platform).filter(p => (S.sentiment_by_platform[p].total || 0) > 30);
   const sentiments = [{key:'positive',name:'Positive',color:COLORS.pos},{key:'negative',name:'Negative',color:COLORS.neg},{key:'neutral',name:'Neutral',color:COLORS.neu}];
-  chart.setOption({
+  chart.setOption({animation:false,
     tooltip:{trigger:'axis', axisPointer:{type:'shadow'}},
     legend:{data:sentiments.map(s=>s.name), bottom:0, textStyle:{color:'#e8e4df'}},
     grid:{top:20, bottom:40, left:50, right:20},
@@ -1265,7 +1267,7 @@ function isDarkSection(el) {
     value: vals, name: key.startsWith('Takaichi') ? 'Takaichi ('+key.split('-')[1]+')' : 'Le Pen ('+key.split('-')[1]+')',
     itemStyle: { color: key.startsWith('Takaichi') ? COLORS.takaichi : COLORS.lepen }
   }));
-  chart.setOption({
+  chart.setOption({animation:false,
     tooltip: {},
     legend: { data: Object.keys(series).map(k => k.startsWith('Takaichi') ? 'Takaichi' : 'Le Pen'), bottom: 0, textStyle:{color:'#4a4a5a'} },
     radar: { indicator: emotions.map(e=>({name:emoZh[e]||e,max:1})), radius:'65%', axisName:{color:'#4a4a5a',fontSize:10} },
@@ -1296,7 +1298,7 @@ function isDarkSection(el) {
       heatData.push([ei, li, v]);
     });
   });
-  chart.setOption({
+  chart.setOption({animation:false,
     tooltip: { formatter: p => `${emotionLabels[p.data[0]]} / ${leaderLabels[p.data[1]]}: ${p.data[2]}%` },
     grid: { top:10, bottom:60, left:80, right:20 },
     xAxis: { type:'category', data:emotionLabels, axisLabel:{fontSize:10,rotate:30}, splitArea:{show:true} },
@@ -1339,7 +1341,7 @@ function isDarkSection(el) {
   merged.forEach(w => wordMap[w.name] = (wordMap[w.name]||0) + w.value);
   const finalData = Object.entries(wordMap).sort((a,b)=>b[1]-a[1]).slice(0,100).map(([name,value]) => ({name,value}));
   const maskColor = lang === 'zh' ? '#c41e3a' : lang === 'en' ? '#2563eb' : '#7c3aed';
-  chart.setOption({
+  chart.setOption({animation:false,
     series: [{ type:'wordCloud', shape:'circle', sizeRange:[12,60], rotationRange:[-45,45], rotationStep:15, gridSize:8, drawOutOfBound:false, textStyle:{ fontFamily:'Source Sans 3', color: function(){ return ['#c41e3a','#0a8a6e','#d4a853','#2563eb','#7c3aed','#ec4899'][Math.floor(Math.random()*6)]; } }, data:finalData }]
   });
   window.addEventListener('resize', () => chart.resize());
@@ -1438,7 +1440,7 @@ function isDarkSection(el) {
     areaStyle: { opacity: 0.15 }
   }));
 
-  chart.setOption({
+  chart.setOption({animation:false,
     tooltip: {
       trigger: 'item',
       formatter: function(params) {
@@ -1548,7 +1550,7 @@ function isDarkSection(el) {
       connectNulls: true
     };
   });
-  chart.setOption({
+  chart.setOption({animation:false,
     tooltip:{trigger:'axis'},
     legend:{data:showSegs.map(s=>s.label), bottom:0, textStyle:{color:'#e8e4df', fontSize:11}},
     grid:{top:40, bottom:70, left:60, right:20, containLabel:true},
